@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pricing-deployment
+  labels:
+    app: pricing
+spec:
+  selector:
+    matchLabels:
+      app: pricing
+  template:
+    metadata:
+      labels:
+        app: pricing
+    spec:
+        containers:
+        - name: pricing
+          image: training/pricing:dev2
+          ports:
+          - containerPort: 80
+          env:
+          - name: pathBase
+            value: "/pricing"

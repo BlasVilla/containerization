@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products-deployment
+  labels:
+    app: products
+spec:
+  selector:
+    matchLabels:
+      app: products
+  template:
+    metadata:
+      labels:
+        app: products
+    spec:
+        containers:
+        - name: products
+          image: training/products:dev2
+          ports:
+          - containerPort: 80
+          env:
+          - name: pathBase
+            value: "/products"

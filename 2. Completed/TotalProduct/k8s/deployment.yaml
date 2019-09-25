@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: total-products-deployment
+  labels:
+    app: total-products
+spec:
+  selector:
+    matchLabels:
+      app: total-products
+  template:
+    metadata:
+      labels:
+        app: total-products
+    spec:
+        containers:
+        - name: total-products
+          image: training/totalproducts:dev2
+          ports:
+          - containerPort: 80
+          env:
+          - name: pathBase
+            value: "/totalproducts"
+          - name: services__productservice
+            value: http://products-service
+          - name: services__productpriceservice
+            value: http://pricing-service
+          
